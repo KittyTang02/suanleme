@@ -1,0 +1,354 @@
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <style>
+            @font-face {
+            font-family: "Nunito Sans";
+            src: local("Nunito Sans"),local("NunitoSans-Black"),
+            url(/NunitoSans-Black.ttf);
+            font-weight: 900;
+}
+            :root{
+                --acid-green: #99EA67;
+            }
+            body{
+                background-color: white;
+                font-weight: 900;
+                color: black;
+            }
+            #root{
+                padding: 24px;
+            }
+            .container{
+                display: flex;
+                flex-direction: column;
+                gap: 20px;
+            }
+            footer{
+                position: fixed;
+                left: 24px;
+                bottom: 24px;
+            }
+            footer a{
+                color: black;
+                text-decoration: none;
+            }
+            h1{
+                font-family: 'Hiragino Kaku Gothic Pro';
+                font-size: 72px;
+                line-height: 100%;
+                margin: 0;
+            }
+            p{
+                margin: 0;
+            }
+            .hiragino-16{
+                font-family: "Hiragino Kaku Gothic Pro","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+                font-size: 16px;
+            }
+            .hiragino-10{
+                font-family: "Hiragino Kaku Gothic Pro","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+                font-size: 10px;
+            }
+            .futura-16{
+                font-family: "Futura","Nunito Sans","Hiragino Kaku Gothic Pro","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
+                font-size: 16px;
+                font-weight: 900;
+            }
+            .content{
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+            .calendar{
+                display: flex;
+                flex-direction: column;
+                padding: 20px;
+                gap: 12px;
+                background-color: white;
+                border: 1px solid black;
+                box-shadow: 2px 2px 0px black;
+            }
+            .calendar-content{
+                width: 100%;
+            }
+            .calendar th{
+                width: 30px;
+                height: 36px;
+                align-items: center;
+                font-weight: 900;
+            }
+            .calendar th div{
+                width: 30px;
+                height: 30px;
+                margin: auto;
+                line-height: 30px;
+                border-radius: 100%;
+            }
+            .marked-date div{
+                background-color: var(--acid-green);
+            }
+            .today div{
+                color: white;
+                text-shadow: 
+                -1px -1px 0px #000,
+                0px -1px 0px #000,
+                1px -1px 0px #000,
+                -1px  0px 0px #000,
+                1px  0px 0px #000,
+                -1px  1px 0px #000,
+                0px  1px 0px #000,
+                1px  1px 0px #000;
+            }
+            .legend
+            {
+                display: flex;
+                flex-direction: row;
+                gap: 4px;
+                align-items: center;
+            }
+            .circle{
+                background-color: var(--acid-green);
+                border-radius: 100%;
+                width: 16px;
+                height: 16px;
+            }                
+        </style>
+    </head>
+    <body>
+        <div id="root">
+            <div class="container">
+                <h1>
+                    酸了么
+                </h1>
+                <div class="content">
+                    <div name="legend" class="legend">
+                        <p class="hiragino-16">
+                            北京市朝阳区
+                        </p>
+                        <div class="circle">
+                        </div>
+                    </div>                
+                    <div name="calendar" class="calendar">
+                        <span class="hiragino-16">
+                            2022年6月
+                        </span>
+                        <table class="calendar-content">
+                            <thead>
+                                <tr class="hiragino-16">
+                                    <th>
+                                        一
+                                    </th>
+                                    <th>
+                                        二
+                                    </th>
+                                    <th>
+                                        三
+                                    </th>
+                                    <th>
+                                        四
+                                    </th>
+                                    <th>
+                                        五
+                                    </th>
+                                    <th>
+                                        六
+                                    </th>
+                                    <th>
+                                        日
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="futura-16">
+                                <tr>
+                                    <th>
+                                    </th>
+                                    <th>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            1
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            2
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            3
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            4
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            5
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <div>
+                                            6
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            7
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            8
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            9
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            10
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            11
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            12
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th class="marked-date">
+                                        <div>
+                                            13
+                                        </div>
+                                    </th>
+                                    <th class="marked-date">
+                                        <div>
+                                            14
+                                        </div>
+                                    </th>
+                                    <th class="marked-date">
+                                        <div>
+                                            15
+                                        </div>
+                                    </th>
+                                    <th class="marked-date">
+                                        <div>
+                                            16
+                                        </div>
+                                    </th>
+                                    <th class="marked-date today">
+                                        <div>
+                                            17
+                                        </div>
+                                    </th>
+                                    <th class="marked-date">
+                                        <div>
+                                            18
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            19
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <div>
+                                            20
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            21
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            22
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            23
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            24
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            25
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            26
+                                        </div>
+                                    </th>
+                                </tr>
+                                <tr>
+                                    <th>
+                                        <div>
+                                            27
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            28
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            29
+                                        </div>
+                                    </th>
+                                    <th>
+                                        <div>
+                                            30
+                                        </div>
+                                    </th>
+                                    <th>
+                                    </th>
+                                    <th>
+                                    </th>
+                                    <th>
+                                    </th>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div name="note" class="hiragino-10">
+                        <p>
+                            *最后更新 2022/06/16 17:35
+                        </p>
+                        <p>
+                            &nbsp;疫情防控发布会367
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <footer>
+                <a class="hiragino-16" href="https://github.com/KittyTang02" target="_blank">
+                    @唐麻袋 做的
+                </a>
+            </footer>
+        </div>
+        
+    </body>
+</html>
