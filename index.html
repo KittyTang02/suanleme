@@ -1,13 +1,25 @@
 <html>
     <head>
+        <title>
+            酸了么-区域核酸筛查日历
+        </title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+        <!-- 分享缩略图、标题、描述 -->
+        <meta property="og:image" content="/pics/open-graph.png">
+        <meta property="og:image:type" content="image/png">
+        <meta property="og:image:width" content="1024">
+        <meta property="og:image:height" content="1024">
+        <meta property="og:title" content="酸了么">
+        <meta property="og:description" content="希望我们都能早日告别核酸筛查。">
+
         <style>
             @font-face {
             font-family: "Nunito Sans";
             src: local("Nunito Sans"),local("NunitoSans-Black"),
             url(/NunitoSans-Black.ttf);
             font-weight: 900;
-}
+            }
             :root{
                 --acid-green: #99EA67;
             }
@@ -116,19 +128,30 @@
         </style>
     </head>
     <body>
+
+        <!-- 微信分享缩略图 -->
+        <div style="display:none;">
+            <img src="/pics/open-graph.png">
+        </div>
+
+
         <div id="root">
             <div class="container">
                 <h1>
                     酸了么
                 </h1>
                 <div class="content">
+
+                    <!-- 图例 -->
                     <div name="legend" class="legend">
                         <p class="hiragino-16">
                             北京市朝阳区
                         </p>
                         <div class="circle">
                         </div>
-                    </div>                
+                    </div> 
+                    
+                    <!-- 2022.6纯手画日历 -->
                     <div name="calendar" class="calendar">
                         <span class="hiragino-16">
                             2022年6月
@@ -333,6 +356,8 @@
                             </tbody>
                         </table>
                     </div>
+
+                    <!-- 脚注 -->
                     <div name="note" class="hiragino-10">
                         <p>
                             *最后更新 2022/06/16 17:35
@@ -341,14 +366,18 @@
                             &nbsp;疫情防控发布会367
                         </p>
                     </div>
+
                 </div>
             </div>
+
+            <!-- 署名 -->
             <footer>
                 <a class="hiragino-16" href="https://github.com/KittyTang02" target="_blank">
                     @唐麻袋 做的
                 </a>
             </footer>
+
         </div>
-        
+
     </body>
 </html>
