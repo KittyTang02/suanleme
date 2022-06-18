@@ -127,18 +127,24 @@
                 width: 16px;
                 height: 16px;
             }          
-            .wechat-open-graph{
+            .wechat-open-graph-container{
                 position: fixed;
                 top: -1000px;
                 left: -1000px;
-            }      
+            }
+            .wechat-open-graph{
+                width: 400px;
+                height: 400px;
+                background-image: url("https://kittytang02.github.io/suanleme/pics/open-graph.png");
+            }
         </style>
     </head>
     <body>
 
         <!-- 看不见的微信分享缩略图 -->
-        <div class="wechat-open-graph">
-            <img src="https://kittytang02.github.io/suanleme/pics/open-graph.png" width="300" height="300">
+        <div class="wechat-open-graph-container">
+            <img src="https://kittytang02.github.io/suanleme/pics/open-graph.png" width="400" height="400">
+            <div class="wechat-open-graph"></div>
         </div>
 
 
