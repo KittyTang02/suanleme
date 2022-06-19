@@ -30,6 +30,7 @@
             }
             :root{
                 --acid-green: #99EA67;
+                --acid-pink: #FFC0D7;
             }
             body{
                 background-color: white;
@@ -38,7 +39,7 @@
                 margin: 0;
             }
             #root{
-                padding: 32px;
+                padding: 24px;
                 position: relative;
                 height: 100%;
                 box-sizing: border-box;
@@ -52,7 +53,7 @@
             }
             footer{
                 position: absolute;
-                left: 32px;
+                left: 24px;
                 bottom: 24px;
             }
             footer a{
@@ -95,24 +96,36 @@
                 border: 1px solid black;
                 box-shadow: 2px 2px 0px black;
             }
+            .calendar tr{
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+            }
             .calendar-content{
                 width: 100%;
             }
+            .calendar-content thead tr th div{
+                position: relative;
+                width: 24px;
+                height: 21px;
+                left: calc(50% - 24px/2);
+                top: calc(50% - 21px/2);
+            }
             .calendar th{
-                width: 30px;
+                width: 24px;
                 height: 36px;
-                align-items: center;
                 font-weight: 900;
+                position: relative;
             }
-            .calendar th div{
-                width: 30px;
-                height: 30px;
-                margin: auto;
-                line-height: 30px;
-                border-radius: 100%;
-            }
-            .covid-testing-day div{
+            .covid-testing-day-pattern{
                 background-color: var(--acid-green);
+                width: 28px;
+                height: 28px;
+                position: absolute;
+                z-index: 1;
+                border-radius: 100%;
+                left: calc(50% - 28px/2);
+                top: calc(50% - 28px/2);
             }
             .today div{
                 color: white;
@@ -125,6 +138,14 @@
                 -1px  1px 0px #000,
                 0px  1px 0px #000,
                 1px  1px 0px #000;
+            }
+            .date-number{
+                z-index: 2;
+                position: relative;
+                width: 24px;
+                height: 21px;
+                left: calc(50% - 24px/2);
+                top: calc(50% - 21px/2);
             }
             .legend
             {
@@ -180,25 +201,34 @@
                             <thead>
                                 <tr class="hiragino-16">
                                     <th>
-                                        一
+                                        <div>
+                                            一
+                                        </div>
                                     </th>
                                     <th>
-                                        二
-                                    </th>
-                                    <th>
-                                        三
-                                    </th>
-                                    <th>
-                                        四
-                                    </th>
-                                    <th>
-                                        五
-                                    </th>
-                                    <th>
-                                        六
-                                    </th>
-                                    <th>
-                                        日
+                                        <div>
+                                            二
+                                        </div>
+                                    </th><th>
+                                        <div>
+                                            三
+                                        </div>
+                                    </th><th>
+                                        <div>
+                                            四
+                                        </div>
+                                    </th><th>
+                                        <div>
+                                            五
+                                        </div>
+                                    </th><th>
+                                        <div>
+                                            六
+                                        </div>
+                                    </th><th>
+                                        <div>
+                                            日
+                                        </div>
                                     </th>
                                 </tr>
                             </thead>
@@ -268,7 +298,7 @@
                         switch (true) {
                             case (date >= 1 && date <= daysInMonth):
                                 var tableCell = document.createElement('th');
-                                tableCell.innerHTML = '<div>' + date + '</div>';
+                                tableCell.innerHTML = '<div class="date-number">' + date + '</div>';
                                 
                                 // 设置每个<th>的id为'YYYY-MM-DD'
                                 tableCell.id = calendarMonth + '-' + date;
@@ -283,7 +313,7 @@
                                 break;
                         }
                         date++;
-                    }   
+                    }
                     tableRow.appendChild(tableCell);
                     dateCellNumber++;
                 }
@@ -299,7 +329,9 @@
             // 为核酸日设置高亮样式
             var covidTestingDays = ['2022-06-13','2022-06-14','2022-06-15','2022-06-16','2022-06-17','2022-06-18'];
             for (id of covidTestingDays) {
-                document.getElementById(id).classList.add('covid-testing-day');
+                var highlightPattern = document.createElement('div');
+                highlightPattern.classList.add('covid-testing-day-pattern');
+                document.getElementById(id).appendChild(highlightPattern);
             }
         </script>
 
