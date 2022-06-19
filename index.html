@@ -105,7 +105,7 @@
                 line-height: 30px;
                 border-radius: 100%;
             }
-            .marked-date div{
+            .covid-testing-day div{
                 background-color: var(--acid-green);
             }
             .today div{
@@ -170,11 +170,10 @@
                         <div class="circle">
                         </div>
                     </div> 
-                    
-                    <!-- 2022.6纯手画日历 -->
+
+                    <!-- moment.js 日历 -->
                     <div name="calendar" class="calendar">
-                        <span class="hiragino-16">
-                            2022年6月
+                        <span class="hiragino-16" id="calendar-header">
                         </span>
                         <table class="calendar-content">
                             <thead>
@@ -202,188 +201,20 @@
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody class="futura-16">
-                                <tr>
-                                    <th>
-                                    </th>
-                                    <th>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            1
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            2
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            3
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            4
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            5
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <div>
-                                            6
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            7
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            8
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            9
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            10
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            11
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            12
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th class="marked-date">
-                                        <div>
-                                            13
-                                        </div>
-                                    </th>
-                                    <th class="marked-date">
-                                        <div>
-                                            14
-                                        </div>
-                                    </th>
-                                    <th class="marked-date">
-                                        <div>
-                                            15
-                                        </div>
-                                    </th>
-                                    <th class="marked-date">
-                                        <div>
-                                            16
-                                        </div>
-                                    </th>
-                                    <th class="marked-date">
-                                        <div>
-                                            17
-                                        </div>
-                                    </th>
-                                    <th class="marked-date today">
-                                        <div>
-                                            18
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            19
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <div>
-                                            20
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            21
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            22
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            23
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            24
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            25
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            26
-                                        </div>
-                                    </th>
-                                </tr>
-                                <tr>
-                                    <th>
-                                        <div>
-                                            27
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            28
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            29
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            30
-                                        </div>
-                                    </th>
-                                    <th>
-                                    </th>
-                                    <th>
-                                    </th>
-                                    <th>
-                                    </th>
-                                </tr>
+                            <tbody class="futura-16" id="table-row-group">
+
                             </tbody>
                         </table>
+
                     </div>
 
                     <!-- 脚注 -->
                     <div name="note" class="hiragino-10">
                         <p>
-                            *最后更新 2022/06/16 17:35
+                            *最后更新 2022/06/19 19:35
                         </p>
                         <p>
-                            &nbsp;疫情防控发布会367
+                            &nbsp;疫情防控发布会370
                         </p>
                     </div>
 
@@ -398,6 +229,78 @@
             </footer>
 
         </div>
+
+        <!-- 引入 moment.js -->
+        <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+        <script>
+            // 插入 x年x月
+            var calendarHeader = document.getElementById('calendar-header');
+            calendarHeader.innerText = moment().format('YYYY[年]M[月]');
+
+            // 获取当前月份
+            var thisMonth = moment().format('YYYY-MM');
+            
+            // 获取本月天数
+            var calendarMonth = thisMonth;
+            var daysInMonth = moment(calendarMonth ,"YYYY-MM").daysInMonth();
+            var date = 1;
+
+            // 获取本月1日前有几个空白格子
+            var emptyCellNumberInFirstRow = moment(thisMonth+'-01').format('d') - 1;
+            var leftEmptyCellNumberInFirstRow = emptyCellNumberInFirstRow;
+
+            // 循环一次，日历添加一行
+            while (date < daysInMonth) {
+                var tableRow = document.createElement('tr');
+                var dateCellNumber = 0;
+
+                // 循环一次，日历添加一格
+                while (dateCellNumber < 7) {
+
+                    // 添加1日前的空白格子
+                    if(leftEmptyCellNumberInFirstRow > 0) {
+                        var tableCell = document.createElement('th');
+                        tableCell.innerHTML = '<div></div>';
+                        leftEmptyCellNumberInFirstRow--;
+                    } else {
+                        switch (true) {
+                            case (date >= 1 && date <= daysInMonth):
+                                var tableCell = document.createElement('th');
+                                tableCell.innerHTML = '<div>' + date + '</div>';
+                                
+                                // 设置每个<th>的id为'YYYY-MM-DD'
+                                tableCell.id = calendarMonth + '-' + date;
+                                break;
+                            
+                            // 添加最后一天后的空白格子
+                            case (daysInMonth < date):
+                                var tableCell = document.createElement('th');
+                                tableCell.innerHTML = '<div></div>';
+                                break;
+                            default:
+                                break;
+                        }
+                        date++;
+                    }   
+                    tableRow.appendChild(tableCell);
+                    dateCellNumber++;
+                }
+                
+                var tableRowGroup = document.getElementById('table-row-group');
+                tableRowGroup.appendChild(tableRow);
+            }
+
+            // 为今天设置空心描边样式
+            var today = document.getElementById(moment().format('YYYY-MM-DD'));
+            today.classList.add('today');
+
+            // 为核酸日设置高亮样式
+            var covidTestingDays = ['2022-06-13','2022-06-14','2022-06-15','2022-06-16','2022-06-17','2022-06-18'];
+            for (id of covidTestingDays) {
+                document.getElementById(id).classList.add('covid-testing-day');
+            }
+        </script>
 
     </body>
 </html>
