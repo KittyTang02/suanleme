@@ -35,9 +35,15 @@
                 background-color: white;
                 font-weight: 900;
                 color: black;
+                margin: 0;
             }
             #root{
-                padding: 24px;
+                padding: 32px;
+                position: relative;
+                height: 100%;
+                box-sizing: border-box;
+                max-width: 480px;
+                margin: auto;
             }
             .container{
                 display: flex;
@@ -45,8 +51,8 @@
                 gap: 20px;
             }
             footer{
-                position: fixed;
-                left: 24px;
+                position: absolute;
+                left: 32px;
                 bottom: 24px;
             }
             footer a{
@@ -133,11 +139,6 @@
                 width: 16px;
                 height: 16px;
             }          
-            .wechat-open-graph-container{
-                /* position: fixed; */
-                /* top: -1000px;
-                left: -1000px; */
-            }
             .wechat-open-graph{
                 width: 200px;
                 height: 200px;
