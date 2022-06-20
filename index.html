@@ -21,152 +21,8 @@
         <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
         <link rel="manifest" href="favicon/site.webmanifest">
 
-        <style>
-            @font-face {
-            font-family: "Nunito Sans";
-            src: local("Nunito Sans"),local("NunitoSans-Black"),
-            url(/NunitoSans-Black.ttf);
-            font-weight: 900;
-            }
-            :root{
-                --acid-green: #99EA67;
-                --acid-pink: #FFC0D7;
-            }
-            body{
-                background-color: white;
-                font-weight: 900;
-                color: black;
-                margin: 0;
-            }
-            #root{
-                padding: 24px;
-                position: relative;
-                height: 100%;
-                box-sizing: border-box;
-                max-width: 480px;
-                margin: auto;
-            }
-            .container{
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-            }
-            footer{
-                position: absolute;
-                left: 24px;
-                bottom: 24px;
-            }
-            footer a{
-                color: black;
-                text-decoration: none;
-            }
-            h1{
-                font-family: 'Hiragino Kaku Gothic Pro';
-                font-size: 72px;
-                line-height: 100%;
-                margin: 0;
-            }
-            p{
-                margin: 0;
-            }
-            .hiragino-16{
-                font-family: "Hiragino Kaku Gothic Pro","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-                font-size: 16px;
-            }
-            .hiragino-10{
-                font-family: "Hiragino Kaku Gothic Pro","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-                font-size: 10px;
-            }
-            .futura-16{
-                font-family: "Futura","Nunito Sans","Hiragino Kaku Gothic Pro","SF Pro Text","SF Pro Icons","Helvetica Neue","Helvetica","Arial",sans-serif;
-                font-size: 16px;
-                font-weight: 900;
-            }
-            .content{
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-            }
-            .calendar{
-                display: flex;
-                flex-direction: column;
-                padding: 20px;
-                gap: 12px;
-                background-color: white;
-                border: 1px solid black;
-                box-shadow: 2px 2px 0px black;
-            }
-            .calendar tr{
-                display: flex;
-                flex-direction: row;
-                justify-content: space-between;
-            }
-            .calendar-content{
-                width: 100%;
-            }
-            .calendar-content thead tr th div{
-                position: relative;
-                width: 24px;
-                height: 21px;
-                left: calc(50% - 24px/2);
-                top: calc(50% - 21px/2);
-            }
-            .calendar th{
-                width: 24px;
-                height: 36px;
-                font-weight: 900;
-                position: relative;
-            }
-            .covid-testing-day-pattern{
-                background-color: var(--acid-green);
-                width: 28px;
-                height: 28px;
-                position: absolute;
-                z-index: 1;
-                border-radius: 100%;
-                left: calc(50% - 28px/2);
-                top: calc(50% - 28px/2);
-            }
-            .today div{
-                color: white;
-                text-shadow: 
-                -1px -1px 0px #000,
-                0px -1px 0px #000,
-                1px -1px 0px #000,
-                -1px  0px 0px #000,
-                1px  0px 0px #000,
-                -1px  1px 0px #000,
-                0px  1px 0px #000,
-                1px  1px 0px #000;
-            }
-            .date-number{
-                z-index: 2;
-                position: relative;
-                width: 24px;
-                height: 21px;
-                left: calc(50% - 24px/2);
-                top: calc(50% - 21px/2);
-            }
-            .legend
-            {
-                display: flex;
-                flex-direction: row;
-                gap: 4px;
-                align-items: center;
-            }
-            .circle{
-                background-color: var(--acid-green);
-                border-radius: 100%;
-                width: 16px;
-                height: 16px;
-            }          
-            .wechat-open-graph{
-                width: 200px;
-                height: 200px;
-                background-image: url("https://kittytang02.github.io/suanleme/pics/open-graph.png");
-                background-size: 200px 200px;
-            }
-        </style>
+        <link rel="stylesheet" href="style.css">
+
     </head>
     <body>
 
@@ -196,6 +52,11 @@
                     <!-- moment.js 日历 -->
                     <div name="calendar" class="calendar">
                         <span class="hiragino-16" id="calendar-header">
+                            <div id="button-group">
+                                <div></div>
+                                <div></div>
+                                <div></div>
+                            </div>
                         </span>
                         <table class="calendar-content">
                             <thead>
@@ -242,10 +103,10 @@
                     <!-- 脚注 -->
                     <div name="note" class="hiragino-10">
                         <p>
-                            *最后更新 2022/06/19 19:35
+                            *最后更新 2022/06/20 17:36
                         </p>
                         <p>
-                            &nbsp;疫情防控发布会370
+                            &nbsp;疫情防控发布会371
                         </p>
                     </div>
 
@@ -264,76 +125,7 @@
         <!-- 引入 moment.js -->
         <script src="https://cdn.bootcdn.net/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 
-        <script>
-            // 插入 x年x月
-            var calendarHeader = document.getElementById('calendar-header');
-            calendarHeader.innerText = moment().format('YYYY[年]M[月]');
-
-            // 获取当前月份
-            var thisMonth = moment().format('YYYY-MM');
-            
-            // 获取本月天数
-            var calendarMonth = thisMonth;
-            var daysInMonth = moment(calendarMonth ,"YYYY-MM").daysInMonth();
-            var date = 1;
-
-            // 获取本月1日前有几个空白格子
-            var emptyCellNumberInFirstRow = moment(thisMonth+'-01').format('d') - 1;
-            var leftEmptyCellNumberInFirstRow = emptyCellNumberInFirstRow;
-
-            // 循环一次，日历添加一行
-            while (date < daysInMonth) {
-                var tableRow = document.createElement('tr');
-                var dateCellNumber = 0;
-
-                // 循环一次，日历添加一格
-                while (dateCellNumber < 7) {
-
-                    // 添加1日前的空白格子
-                    if(leftEmptyCellNumberInFirstRow > 0) {
-                        var tableCell = document.createElement('th');
-                        tableCell.innerHTML = '<div></div>';
-                        leftEmptyCellNumberInFirstRow--;
-                    } else {
-                        switch (true) {
-                            case (date >= 1 && date <= daysInMonth):
-                                var tableCell = document.createElement('th');
-                                tableCell.innerHTML = '<div class="date-number">' + date + '</div>';
-                                
-                                // 设置每个<th>的id为'YYYY-MM-DD'
-                                tableCell.id = calendarMonth + '-' + date;
-                                break;
-                            
-                            // 添加最后一天后的空白格子
-                            case (daysInMonth < date):
-                                var tableCell = document.createElement('th');
-                                tableCell.innerHTML = '<div></div>';
-                                break;
-                            default:
-                                break;
-                        }
-                        date++;
-                    }
-                    tableRow.appendChild(tableCell);
-                    dateCellNumber++;
-                }
-                
-                var tableRowGroup = document.getElementById('table-row-group');
-                tableRowGroup.appendChild(tableRow);
-            }
-
-            // 为今天设置空心描边样式
-            var today = document.getElementById(moment().format('YYYY-MM-DD'));
-            today.classList.add('today');
-
-            // 为核酸日设置高亮样式
-            var covidTestingDays = ['2022-06-13','2022-06-14','2022-06-15','2022-06-16','2022-06-17','2022-06-18'];
-            for (id of covidTestingDays) {
-                var highlightPattern = document.createElement('div');
-                highlightPattern.classList.add('covid-testing-day-pattern');
-                document.getElementById(id).appendChild(highlightPattern);
-            }
-        </script>
+        <script src="script-file.js"></script>
 
     </body>
 </html>
