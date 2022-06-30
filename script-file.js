@@ -34,7 +34,16 @@ while (date < daysInMonth) {
                     tableCell.innerHTML = '<div class="date-number">' + date + '</div>';
                     
                     // 设置每个<th>的id为'YYYY-MM-DD'
-                    tableCell.id = calendarMonth + '-' + date;
+                    switch(true){
+                        case(date < 10):
+                            tableCell.id = calendarMonth + '-0' + date;
+                            break;
+                        case(date >= 10):
+                            tableCell.id = calendarMonth + '-' + date;
+                            break;
+                        default:
+                            break;
+                    }
                     break;
                 
                 // 添加最后一天后的空白格子
