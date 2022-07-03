@@ -1,77 +1,75 @@
+// 获取日历所需基本信息
+let calendarStartTime = moment();
+calendarStartTime.startOf("month");
+let calendarEndTime = moment();
+calendarEndTime.endOf("month");
+
+calendarStartTime.subtract(1,'M');
+calendarEndTime.subtract(1,'M').endOf('month');
+
 // 插入 x年x月
-var calendarHeader = document.getElementById('calendar-header');
-calendarHeader.innerText = moment().format('YYYY[年]M[月]');
+addCalendarTitle(calendarStartTime);
 
-// 获取当前月份
-var thisMonth = moment().format('YYYY-MM');
+// 添加表头
+addTableHead();
 
-// 获取本月天数
-var calendarMonth = thisMonth;
-var daysInMonth = moment(calendarMonth ,"YYYY-MM").daysInMonth();
-var date = 1;
+// 添加日历数字
+addTableNumbers(calendarStartTime, calendarEndTime);
 
-// 获取本月1日前有几个空白格子
-var emptyCellNumberInFirstRow = moment(thisMonth+'-01').format('d') - 1;
-var leftEmptyCellNumberInFirstRow = emptyCellNumberInFirstRow;
+// Highlight TODAY
+const today = document.getElementById(moment().format('YYYY-MM-DD'));
+if (today) {today.classList.add('calendar-cell-today');}
 
-// 循环一次，日历添加一行
-while (date < daysInMonth) {
-    var tableRow = document.createElement('tr');
-    var dateCellNumber = 0;
+// Mark covid-testing days
+const covidTestingDays = ['2022-06-13','2022-06-14','2022-06-15','2022-06-16','2022-06-17','2022-06-18'];
+markCovidTestingDays();
 
-    // 循环一次，日历添加一格
-    while (dateCellNumber < 7) {
-
-        // 添加1日前的空白格子
-        if(leftEmptyCellNumberInFirstRow > 0) {
-            var tableCell = document.createElement('th');
-            tableCell.innerHTML = '<div></div>';
-            leftEmptyCellNumberInFirstRow--;
-        } else {
-            switch (true) {
-                case (date >= 1 && date <= daysInMonth):
-                    var tableCell = document.createElement('th');
-                    tableCell.innerHTML = '<div class="date-number">' + date + '</div>';
-                    
-                    // 设置每个<th>的id为'YYYY-MM-DD'
-                    switch(true){
-                        case(date < 10):
-                            tableCell.id = calendarMonth + '-0' + date;
-                            break;
-                        case(date >= 10):
-                            tableCell.id = calendarMonth + '-' + date;
-                            break;
-                        default:
-                            break;
-                    }
-                    break;
-                
-                // 添加最后一天后的空白格子
-                case (daysInMonth < date):
-                    var tableCell = document.createElement('th');
-                    tableCell.innerHTML = '<div></div>';
-                    break;
-                default:
-                    break;
-            }
-            date++;
-        }
-        tableRow.appendChild(tableCell);
-        dateCellNumber++;
-    }
-    
-    var tableRowGroup = document.getElementById('table-row-group');
-    tableRowGroup.appendChild(tableRow);
+function addCalendarTitle(time) {
+    let calendarTitle = document.getElementById("calendar-title");
+    calendarTitle.innerText = time.format("YYYY[年]M[月]");
+    return;
 }
 
-// 为今天设置空心描边样式
-var today = document.getElementById(moment().format('YYYY-MM-DD'));
-today.classList.add('today');
+function addTableHead() {
+    const WeekDays = ["一", "二", "三", "四", "五", "六", "日"];
+    for (const DayOfWeek of WeekDays){
+        const tableCell = document.createElement("div");
+        tableCell.innerText = DayOfWeek;
+        document.getElementById("calendar-table").appendChild(tableCell);
+    }
+}
 
-// 为核酸日设置高亮样式
-var covidTestingDays = ['2022-06-13','2022-06-14','2022-06-15','2022-06-16','2022-06-17','2022-06-18'];
-for (id of covidTestingDays) {
-    var highlightPattern = document.createElement('div');
-    highlightPattern.classList.add('covid-testing-day-pattern');
-    document.getElementById(id).appendChild(highlightPattern);
+function addTableNumbers(time, endTime) {
+    // Column number of the first day
+    const dayOfWeek = time.format('d');
+    const columnNumber = dayOfWeek == 0 ? 7 : dayOfWeek;
+    const firstDayId = time.format("YYYY-MM-DD");
+
+    // Add numbers in calendar table and set ids as YYYY-MM-DD
+    while (time.isBefore(endTime)) {
+        const tableCell = document.createElement("div");
+        tableCell.id = time.format("YYYY-MM-DD");
+        tableCell.classList.add("futura-16")
+        tableCell.innerText = time.format("D");
+        document.getElementById("calendar-table").appendChild(tableCell);
+        time.add(1, "d");
+    }
+
+    // Move the first day to right column
+    document.getElementById(firstDayId).style.gridColumnStart = columnNumber;
+    return;
+}
+
+function markCovidTestingDays() {
+    for (const id of covidTestingDays) {
+        const markDateCell = document.getElementById(id);
+        if (markDateCell) {
+            const style = getComputedStyle(markDateCell);
+            const markPattern = document.createElement('div');
+            markPattern.classList.add('calendar-covid-testing-day-green');
+            markPattern.style.gridArea = style.gridArea;
+            document.getElementById("calendar-table").appendChild(markPattern);
+        }
+    }
+    return;
 }

@@ -22,6 +22,7 @@
         <link rel="manifest" href="favicon/site.webmanifest">
 
         <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="grid-calendar.css">
 
     </head>
     <body>
@@ -49,56 +50,14 @@
                         </div>
                     </div> 
 
-                    <!-- moment.js 日历 -->
-                    <div name="calendar" class="calendar">
-                        <span class="hiragino-16" id="calendar-header">
-                            <div id="button-group">
-                                <div></div>
-                                <div></div>
-                                <div></div>
-                            </div>
-                        </span>
-                        <table class="calendar-content">
-                            <thead>
-                                <tr class="hiragino-16">
-                                    <th>
-                                        <div>
-                                            一
-                                        </div>
-                                    </th>
-                                    <th>
-                                        <div>
-                                            二
-                                        </div>
-                                    </th><th>
-                                        <div>
-                                            三
-                                        </div>
-                                    </th><th>
-                                        <div>
-                                            四
-                                        </div>
-                                    </th><th>
-                                        <div>
-                                            五
-                                        </div>
-                                    </th><th>
-                                        <div>
-                                            六
-                                        </div>
-                                    </th><th>
-                                        <div>
-                                            日
-                                        </div>
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody class="futura-16" id="table-row-group">
-
-                            </tbody>
-                        </table>
-
+                    <!-- 日历 -->
+                    <div class="calendar-container">
+                        <div class="calendar-title-and-buttons">
+                            <div id="calendar-title" class="calendar-title hiragino-16"></div>
+                        </div>
+                        <div id="calendar-table" class="calendar-table"></div>
                     </div>
+                    
 
                     <!-- 脚注 -->
                     <div name="note" class="hiragino-10">
