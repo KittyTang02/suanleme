@@ -21,6 +21,38 @@
     grid-column: span 4;
     justify-self: start;
 }
+.calendar-button{
+    width: 30px;
+    height: 22px;
+}
+.arrow-left{
+    width: 0;
+	height: 0;
+	border-top: 8px solid  transparent; 
+	border-bottom: 8px solid  transparent; 
+	border-right: 13.8564064px solid black;  
+    /* (8px + 8px) * 0.8660254 = 13.8564064px = EquilateralTriangle height */
+    margin: auto;
+    margin-top: 3px;
+}
+.current-circle{
+    width: 12px;
+    height: 12px;
+    background-color: black;
+    border-radius: 100%;
+    margin: auto;
+    margin-top: 5px;
+}
+.arrow-right{
+    width: 0;
+	height: 0;
+	border-top: 8px solid  transparent; 
+	border-bottom: 8px solid  transparent; 
+	border-left: 13.8564064px solid black;  
+    /* (8px + 8px) * 0.8660254 = 13.8564064px = EquilateralTriangle height */
+    margin: auto;
+    margin-top: 3px;
+}
 .calendar-table{
     display: grid;
     grid-template-columns: repeat(7, 30px);
