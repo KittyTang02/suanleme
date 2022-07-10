@@ -4,8 +4,8 @@ calendarStartTime.startOf("month");
 let calendarEndTime = moment();
 calendarEndTime.endOf("month");
 
-calendarStartTime.subtract(1,'M');
-calendarEndTime.subtract(1,'M').endOf('month');
+// calendarStartTime.subtract(1,'M');
+// calendarEndTime.subtract(1,'M').endOf('month');
 
 // 插入 x年x月
 addCalendarTitle(calendarStartTime);
@@ -49,8 +49,9 @@ function addTableNumbers(time, endTime) {
     while (time.isBefore(endTime)) {
         const tableCell = document.createElement("div");
         tableCell.id = time.format("YYYY-MM-DD");
-        tableCell.classList.add("futura-16")
-        tableCell.innerText = time.format("D");
+        tableCell.classList.add("futura-16");
+        tableCell.classList.add("calendar-cell-number");
+        tableCell.innerHTML = "<span>" + time.format("D") + "</span>";
         document.getElementById("calendar-table").appendChild(tableCell);
         time.add(1, "d");
     }
@@ -64,11 +65,10 @@ function markCovidTestingDays() {
     for (const id of covidTestingDays) {
         const markDateCell = document.getElementById(id);
         if (markDateCell) {
-            const style = getComputedStyle(markDateCell);
             const markPattern = document.createElement('div');
             markPattern.classList.add('calendar-covid-testing-day-green');
-            markPattern.style.gridArea = style.gridArea;
-            document.getElementById("calendar-table").appendChild(markPattern);
+            container = document.getElementById(id);
+            container.insertBefore(markPattern,container.firstChild);
         }
     }
     return;

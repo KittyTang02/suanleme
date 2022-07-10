@@ -30,6 +30,15 @@
     justify-content: space-between;
     grid-auto-rows: 36px;
 }
+.calendar-cell-number{
+    position:relative;
+}
+.calendar-cell-number span{
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    width: 30px;
+}
 .calendar-cell-today{
     color: white;
     text-shadow: 
@@ -46,7 +55,9 @@
     background-color: var(--acid-green);
     width: 28px;
     height: 28px;
-    justify-self: center;
-    align-self: center;
     border-radius: 100%;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
 }
