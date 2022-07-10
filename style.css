@@ -63,69 +63,7 @@ p{
     flex-direction: column;
     gap: 12px;
 }
-.calendar{
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-    gap: 12px;
-    background-color: white;
-    border: 1px solid black;
-    box-shadow: 2px 2px 0px black;
-}
-.calendar tr{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-
-.calendar-content{
-    width: 100%;
-}
-.calendar-content thead tr th div{
-    position: relative;
-    width: 24px;
-    height: 21px;
-    left: calc(50% - 24px/2);
-    top: calc(50% - 21px/2);
-}
-.calendar th{
-    width: 24px;
-    height: 36px;
-    font-weight: 900;
-    position: relative;
-}
-.covid-testing-day-pattern{
-    background-color: var(--acid-green);
-    width: 28px;
-    height: 28px;
-    position: absolute;
-    z-index: 1;
-    border-radius: 100%;
-    left: calc(50% - 28px/2);
-    top: calc(50% - 28px/2);
-}
-.today div{
-    color: white;
-    text-shadow: 
-    -1px -1px 0px #000,
-    0px -1px 0px #000,
-    1px -1px 0px #000,
-    -1px  0px 0px #000,
-    1px  0px 0px #000,
-    -1px  1px 0px #000,
-    0px  1px 0px #000,
-    1px  1px 0px #000;
-}
-.date-number{
-    z-index: 2;
-    position: relative;
-    width: 24px;
-    height: 21px;
-    left: calc(50% - 24px/2);
-    top: calc(50% - 21px/2);
-}
-.legend
-{
+.legend{
     display: flex;
     flex-direction: row;
     gap: 4px;
@@ -136,7 +74,7 @@ p{
     border-radius: 100%;
     width: 16px;
     height: 16px;
-}          
+}           
 .wechat-open-graph{
     width: 200px;
     height: 200px;
