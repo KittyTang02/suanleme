@@ -13,6 +13,10 @@ body{
     font-weight: 900;
     color: black;
     margin: 0;
+    user-select: none;
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
 }
 #root{
     padding: 24px;
